@@ -84,20 +84,17 @@ namespace WebAppCentralBank.Models.DataBase
             using (NpgsqlConnection connection = GetConnection())
             {
                 connection.Open();
-                string query = @"SELECT date,numCode,charcode,nominal,name,value,previous FROM public.""Currency"" WHERE ""charcode"" LIKE @title ORDER BY ""ID"" DESC LIMIT 1 ;";
+                string query = @"SELECT charcode,nominal,name,value,previous FROM public.""Currency"" WHERE ""charcode"" LIKE @title ORDER BY ""ID"" DESC LIMIT 1 ;";
                 NpgsqlCommand cmd = new NpgsqlCommand(query, connection);
                 cmd.Parameters.AddWithValue("@title", likeValue);
 
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    currency.dateTimeDB = reader.GetDateTime(0);
-                    currency.NumCode = reader.GetInt32(1);
-                    currency.CharCode = reader.GetString(2);
-                    currency.Nominal = reader.GetInt32(3);
-                    currency.Name = reader.GetString(4);
-                    currency.Value = reader.GetDecimal(5);
-                    currency.Previous = reader.GetDecimal(6);
+                    currency.Nominal = reader.GetInt32(0);
+                    currency.Name = reader.GetString(1);
+                    currency.Value = reader.GetDecimal(2);
+                    currency.Previous = reader.GetDecimal(3);
                 }
                 connection.Close();
 

@@ -5,7 +5,7 @@
     /// </summary>
     public class GBP : ICurrency
     {
-        public DateTime dateTimeDB { get; set; }
+
         public int NumCode { get; set; }
         public string CharCode { get; set; }
         public int Nominal { get; set; }

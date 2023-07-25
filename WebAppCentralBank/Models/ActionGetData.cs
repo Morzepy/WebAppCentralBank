@@ -1,4 +1,5 @@
-﻿using WebAppCentralBank.Models.Parse;
+﻿using WebAppCentralBank.Models;
+using WebAppCentralBank.Models.Parse;
 using WebAppCentralBank.Models.DataBase;
 using WebAppCentralBank.Models.Parse.JsonObject;
 
@@ -6,11 +7,13 @@ namespace WebAppCentralBank.Models
 {
     public class ActionGetData
     {
-        const string LIKEVALUEUSD = "USD";
-        const string LIKEVALUEEUR = "EUR";
-        const string LIKEVALUECNY = "CNY";
+        private const string LIKEVALUEUSD = "USD";
+        private const string LIKEVALUEEUR = "EUR";
+        private const string LIKEVALUECNY = "CNY";
+        private const string LIKEVALUEGBP = "GBP";
+        private const string LIKEVALUETRY = "TRY";
 
-        public void Action()
+        public void RefreshingDATA()
         {
             DataBaseContext connection = new DataBaseContext();
 
@@ -23,17 +26,86 @@ namespace WebAppCentralBank.Models
             ///Checking the time data for data parsing
             if (nowDateTime - dateTimeBaseDate > timer)
             {
-                Parsing.Updatingdata(connection);
+                Parsing.WritingData(connection);
             }
-            List<string> listEurDB = GettingListDataCurrency(connection, new EUR(), LIKEVALUEEUR);
-            List<string> listCnyDB = GettingListDataCurrency(connection, new CNY(), LIKEVALUECNY);
-            List<string> listUsdDB = GettingListDataCurrency(connection, new USD(), LIKEVALUEUSD);
 
         }
-        static List<string> GettingListDataCurrency(DataBaseContext connection, ICurrency currency, string LIKEVALEU)
+
+        /// <summary>
+        /// Getting DateTime data from the database
+        /// </summary>
+        /// <returns>DateTime</returns>
+        public DateTime GetDateTime()
         {
-            var dataBD = connection.SelectLastRecordCurrency(currency, LIKEVALEU);
-            return ConvertorList.ConvertListStringCurrency(dataBD);
+            DataBaseContext connection = new DataBaseContext(); ;
+            DateTime dateTimeBaseDate = connection.SelectLastRecordDateTime();
+            return dateTimeBaseDate;
+        }
+
+        /// <summary>
+        /// Getting ICurrency USD data from the database
+        /// </summary>
+        /// <returns>ICurrency</returns>
+        public ICurrency GetUSDDbCurrency()
+        {
+            var usdDB = DBcurrency(new USD(), LIKEVALUEUSD);
+            return usdDB;
+        }
+
+        /// <summary>
+        /// Getting ICurrency EUR data from the database
+        /// </summary>
+        /// <returns>ICurrency</returns>
+        public ICurrency GetEURDbCurrency()
+        {
+            var eurDB = DBcurrency(new EUR(), LIKEVALUEEUR);
+            return eurDB;
+        }
+
+        /// <summary>
+        /// Getting ICurrency GBP data from the database
+        /// </summary>
+        /// <returns>ICurrency</returns>
+        public ICurrency GetGBPDbCurrency()
+        {
+            var gbpDB = DBcurrency(new GBP(), LIKEVALUEUSD);
+            return gbpDB;
+
+        }
+
+        /// <summary>
+        /// Getting ICurrency TRY data from the database
+        /// </summary>
+        /// <returns>ICurrency</returns>
+        public ICurrency GetTRYDbCurrency()
+        {
+            var tryDB = DBcurrency(new TRY(), LIKEVALUETRY);
+            return tryDB;
+
+        }
+
+        /// <summary>
+        /// Getting ICurrency CNY data from the database
+        /// </summary>
+        /// <returns>ICurrency</returns>
+        public ICurrency GetCNYDbCurrency()
+        {
+            var cnyDB = DBcurrency(new CNY(), LIKEVALUETRY);
+            return cnyDB;
+
+        }
+
+        /// <summary>
+        /// Selecting a currency from the database
+        /// </summary>
+        /// <param name="currency"></param>
+        /// <param name="LIKEVALUE"></param>
+        /// <returns>ICurrency</returns>
+        private ICurrency DBcurrency(ICurrency currency, string LIKEVALUE)
+        {
+            DataBaseContext connection = new DataBaseContext();
+            var dataBD = connection.SelectLastRecordCurrency(currency, LIKEVALUE);
+            return dataBD;
         }
         
     }
