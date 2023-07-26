@@ -21,7 +21,23 @@ namespace WebAppCentralBank.Models
 
             DateTime nowDateTime = DateTime.Now;
 
-            TimeSpan timer = TimeSpan.FromHours(24);
+            TimeSpan timer = new TimeSpan();
+            if (nowDateTime.DayOfWeek == DayOfWeek.Saturday)
+            {
+                timer = TimeSpan.FromDays(2);
+            }
+            else if (nowDateTime.DayOfWeek == DayOfWeek.Sunday)
+            {
+                timer = TimeSpan.FromDays(3);
+            }
+            else if (nowDateTime.DayOfWeek == DayOfWeek.Monday)
+            {
+                timer = TimeSpan.FromDays(4);
+            }
+            else
+            {
+                timer = TimeSpan.FromDays(1);
+            }
 
             ///Checking the time data for data parsing
             if (nowDateTime - dateTimeBaseDate > timer)

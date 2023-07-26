@@ -5,7 +5,7 @@ namespace WebAppCentralBank.Models.DataBase
 {
     public class DataBaseContext
     {
-        const string DBCONNECTIONSTRING = "Server=localhost;Port=5432;User Id=postgres;Password=rootroot;Database=appCBank";
+        private const string DBCONNECTIONSTRING = "Server=localhost;Port=5432;User Id=postgres;Password=rootroot;Database=appCBank";
         private NpgsqlConnection GetConnection()
         {
             return new NpgsqlConnection(DBCONNECTIONSTRING);
@@ -59,7 +59,6 @@ namespace WebAppCentralBank.Models.DataBase
                 string query = @"SELECT date FROM public.""Currency"" ORDER BY ""ID"" DESC LIMIT 1;";
                 NpgsqlCommand cmd = new NpgsqlCommand(query, connection);
                 DateTime date = new DateTime();
-                // cmd.Parameters.AddWithValue("date", date);
                 var reader = cmd.ExecuteReader();
 
                 while (reader.Read())

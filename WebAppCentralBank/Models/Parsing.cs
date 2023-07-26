@@ -53,70 +53,55 @@ namespace WebAppCentralBank.Models
 
             DateTime jsonTime = Convert.ToDateTime(centralBankJsonDeserialized?.Date);
 
-            USD usd = new USD()
-            {
-                NumCode = centralBankJsonDeserialized.Valute.USD.NumCode,
-                CharCode = centralBankJsonDeserialized.Valute.USD.CharCode,
-                Nominal = centralBankJsonDeserialized.Valute.USD.Nominal,
-                Name = centralBankJsonDeserialized.Valute.USD.Name,
-                Value = centralBankJsonDeserialized.Valute.USD.Value,
-                Previous = centralBankJsonDeserialized.Valute.USD.Previous
-            };
+            USD usdJson = new USD(centralBankJsonDeserialized.Valute.USD.NumCode,
+                                  centralBankJsonDeserialized.Valute.USD.CharCode,
+                                  centralBankJsonDeserialized.Valute.USD.Nominal,
+                                  centralBankJsonDeserialized.Valute.USD.Name,
+                                  centralBankJsonDeserialized.Valute.USD.Value,
+                                  centralBankJsonDeserialized.Valute.USD.Previous);
 
-            GBP gbp = new GBP()
-            {
-                NumCode = centralBankJsonDeserialized.Valute.GBP.NumCode,
-                CharCode = centralBankJsonDeserialized.Valute.GBP.CharCode,
-                Nominal = centralBankJsonDeserialized.Valute.GBP.Nominal,
-                Name = centralBankJsonDeserialized.Valute.GBP.Name,
-                Value = centralBankJsonDeserialized.Valute.GBP.Value,
-                Previous = centralBankJsonDeserialized.Valute.GBP.Previous
-            };
+                EUR eurJson = new EUR(centralBankJsonDeserialized.Valute.EUR.NumCode,
+                                  centralBankJsonDeserialized.Valute.EUR.CharCode,
+                                  centralBankJsonDeserialized.Valute.EUR.Nominal,
+                                  centralBankJsonDeserialized.Valute.EUR.Name,
+                                  centralBankJsonDeserialized.Valute.EUR.Value,
+                                  centralBankJsonDeserialized.Valute.EUR.Previous);
 
-            TRY tryCurrency = new TRY()
-            {
-                NumCode = centralBankJsonDeserialized.Valute.TRY.NumCode,
-                CharCode = centralBankJsonDeserialized.Valute.TRY.CharCode,
-                Nominal = centralBankJsonDeserialized.Valute.TRY.Nominal,
-                Name = centralBankJsonDeserialized.Valute.TRY.Name,
-                Value = centralBankJsonDeserialized.Valute.TRY.Value,
-                Previous = centralBankJsonDeserialized.Valute.TRY.Previous
-            };
+                GBP gbpJson = new GBP(centralBankJsonDeserialized.Valute.GBP.NumCode,
+                                  centralBankJsonDeserialized.Valute.GBP.CharCode,
+                                  centralBankJsonDeserialized.Valute.GBP.Nominal,
+                                  centralBankJsonDeserialized.Valute.GBP.Name,
+                                  centralBankJsonDeserialized.Valute.GBP.Value,
+                                  centralBankJsonDeserialized.Valute.GBP.Previous);
 
-            EUR eur = new EUR()
-            {
-                NumCode = centralBankJsonDeserialized.Valute.EUR.NumCode,
-                CharCode = centralBankJsonDeserialized.Valute.EUR.CharCode,
-                Nominal = centralBankJsonDeserialized.Valute.EUR.Nominal,
-                Name = centralBankJsonDeserialized.Valute.EUR.Name,
-                Value = centralBankJsonDeserialized.Valute.EUR.Value,
-                Previous = centralBankJsonDeserialized.Valute.EUR.Previous
-            };
+                TRY tryJson = new TRY(centralBankJsonDeserialized.Valute.TRY.NumCode,
+                                  centralBankJsonDeserialized.Valute.TRY.CharCode,
+                                  centralBankJsonDeserialized.Valute.TRY.Nominal,
+                                  centralBankJsonDeserialized.Valute.TRY.Name,
+                                  centralBankJsonDeserialized.Valute.TRY.Value,
+                                  centralBankJsonDeserialized.Valute.TRY.Previous);
 
-            CNY cny = new CNY()
-            {
-                NumCode = centralBankJsonDeserialized.Valute.CNY.NumCode,
-                CharCode = centralBankJsonDeserialized.Valute.CNY.CharCode,
-                Nominal = centralBankJsonDeserialized.Valute.CNY.Nominal,
-                Name = centralBankJsonDeserialized.Valute.CNY.Name,
-                Value = centralBankJsonDeserialized.Valute.CNY.Value,
-                Previous = centralBankJsonDeserialized.Valute.CNY.Previous
-            };
+                CNY cnyJson = new CNY(centralBankJsonDeserialized.Valute.CNY.NumCode,
+                                  centralBankJsonDeserialized.Valute.CNY.CharCode,
+                                  centralBankJsonDeserialized.Valute.CNY.Nominal,
+                                  centralBankJsonDeserialized.Valute.CNY.Name,
+                                  centralBankJsonDeserialized.Valute.CNY.Value,
+                                  centralBankJsonDeserialized.Valute.CNY.Previous);
 
-            connection.InsertRecordValute(jsonTime, usd.NumCode, usd.CharCode, usd.Nominal, usd.Name,
-                usd.Value, usd.Previous);
+                connection.InsertRecordValute(jsonTime, usdJson.NumCode, usdJson.CharCode, usdJson.Nominal, usdJson.Name,
+                    usdJson.Value, usdJson.Previous);
 
-            connection.InsertRecordValute(jsonTime, eur.NumCode, eur.CharCode, eur.Nominal, eur.Name,
-                eur.Value, eur.Previous);
+                connection.InsertRecordValute(jsonTime, eurJson.NumCode, eurJson.CharCode, eurJson.Nominal, eurJson.Name,
+                    eurJson.Value, eurJson.Previous);
 
-            connection.InsertRecordValute(jsonTime, gbp.NumCode, gbp.CharCode, gbp.Nominal, gbp.Name,
-                gbp.Value, gbp.Previous);
+                connection.InsertRecordValute(jsonTime, gbpJson.NumCode, gbpJson.CharCode, gbpJson.Nominal, gbpJson.Name,
+                    gbpJson.Value, gbpJson.Previous);
 
-            connection.InsertRecordValute(jsonTime, tryCurrency.NumCode, tryCurrency.CharCode, tryCurrency.Nominal, tryCurrency.Name,
-                tryCurrency.Value, tryCurrency.Previous);
+                connection.InsertRecordValute(jsonTime, tryJson.NumCode, tryJson.CharCode, tryJson.Nominal, tryJson.Name,
+                    tryJson.Value, tryJson.Previous);
 
-            connection.InsertRecordValute(jsonTime, cny.NumCode, cny.CharCode, cny.Nominal, cny.Name,
-                cny.Value, cny.Previous);
+                connection.InsertRecordValute(jsonTime, cnyJson.NumCode, cnyJson.CharCode, cnyJson.Nominal, cnyJson.Name,
+                    cnyJson.Value, cnyJson.Previous);
         }
         
     }
