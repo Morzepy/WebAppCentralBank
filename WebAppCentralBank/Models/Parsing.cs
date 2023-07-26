@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.Net;
-using WebAppCentralBank.Models.Parse;
 using WebAppCentralBank.Models.DataBase;
 using WebAppCentralBank.Models.Parse.JsonObject;
 
