@@ -5,14 +5,14 @@ using WebAppCentralBank.Models.Parse.JsonObject;
 
 namespace WebAppCentralBank.Models
 {
-    public class ActionGetData
+    public class ModelGetData
     {
         private const string LIKEVALUEUSD = "USD";
         private const string LIKEVALUEEUR = "EUR";
-        private const string LIKEVALUECNY = "CNY";
         private const string LIKEVALUEGBP = "GBP";
         private const string LIKEVALUETRY = "TRY";
-
+        private const string LIKEVALUECNY = "CNY";
+        
         public void RefreshingDATA()
         {
             DataBaseContext connection = new DataBaseContext();

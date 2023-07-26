@@ -7,18 +7,21 @@ namespace WebAppCentralBank.Controllers
 {
     public class HomeController : Controller
     {
-        public void GettingAndRefreshingData()
+        /// <summary>
+        /// GettingAndRefreshingData
+        /// </summary>
+        private void GettingAndRefreshingData()
         {
-            ActionGetData businessLogic = new ActionGetData();
-            businessLogic.RefreshingDATA();
+            ModelGetData modelGetData = new ModelGetData();
+            modelGetData.RefreshingDATA();
 
-            ICurrency usdDB = businessLogic.GetUSDDbCurrency();
-            ICurrency eurDB = businessLogic.GetEURDbCurrency();
-            ICurrency gbpDB = businessLogic.GetGBPDbCurrency();
-            ICurrency tryDB = businessLogic.GetTRYDbCurrency();
-            ICurrency cnyDB = businessLogic.GetCNYDbCurrency();
+            ICurrency usdDB = modelGetData.GetUSDDbCurrency();
+            ICurrency eurDB = modelGetData.GetEURDbCurrency();
+            ICurrency gbpDB = modelGetData.GetGBPDbCurrency();
+            ICurrency tryDB = modelGetData.GetTRYDbCurrency();
+            ICurrency cnyDB = modelGetData.GetCNYDbCurrency();
 
-            DateTime dateDB = businessLogic.GetDateTime();
+            DateTime dateDB = modelGetData.GetDateTime();
             ViewBag.date = dateDB;
 
             ViewBag.usdCharCode = usdDB.CharCode;
@@ -57,7 +60,6 @@ namespace WebAppCentralBank.Controllers
             GettingAndRefreshingData();
             return View();
         }
-
         protected void Button_Click(object sender, EventArgs e)
         {
             GettingAndRefreshingData();

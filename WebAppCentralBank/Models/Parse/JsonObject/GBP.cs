@@ -12,13 +12,16 @@
         public string Name { get; set; }
         public decimal Value { get; set; }
         public decimal Previous { get; set; }
+
         public GBP() { }
+
         public GBP(int NumCode, string CharCode, int Nominal)
         {
             this.NumCode = NumCode;
             this.CharCode = CharCode;
             this.Nominal = Nominal;
         }
+
         public GBP(int NumCode, string CharCode, int Nominal, string Name)
         {
             this.NumCode = NumCode;
@@ -26,6 +29,7 @@
             this.Nominal = Nominal;
             this.Name = Name;
         }
+
         public GBP(int NumCode, string CharCode, int Nominal, string Name, decimal Value)
         {
             this.NumCode = NumCode;
