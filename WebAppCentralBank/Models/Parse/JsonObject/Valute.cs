@@ -1,5 +1,6 @@
 ﻿namespace WebAppCentralBank.Models.Parse.JsonObject
 {
+
     public class Valute
     {
         public USD USD { get; set; }

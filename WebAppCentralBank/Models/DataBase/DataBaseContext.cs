@@ -6,7 +6,7 @@ namespace WebAppCentralBank.Models.DataBase
     public class DataBaseContext
     {
         private const string DBCONNECTIONSTRING = "Server=localhost;Port=5432;User Id=postgres;Password=rootroot;Database=appCBank";
-        private NpgsqlConnection GetConnection()
+        static private NpgsqlConnection GetConnection()
         {
             return new NpgsqlConnection(DBCONNECTIONSTRING);
         }
@@ -26,8 +26,8 @@ namespace WebAppCentralBank.Models.DataBase
         {
             using (NpgsqlConnection connection = GetConnection())
             {
-                string query = @"insert into public.""Currency"" (date,numcode,charcode,nominal,name,value,previous) values(@Date,
-                    @NumCode,@CharCode, @Nominal,@Name,@Value,@Previous)";
+                string query = @"insert into public.""Currency"" (date,numcode,charcode,nominal,name,value,previous) 
+                                values(@Date,@NumCode,@CharCode, @Nominal,@Name,@Value,@Previous)";
                 NpgsqlCommand cmd = new NpgsqlCommand(query, connection);
                 cmd.Parameters.AddWithValue("Date", Date);
                 cmd.Parameters.AddWithValue("NumCode", NumCode);
@@ -38,11 +38,6 @@ namespace WebAppCentralBank.Models.DataBase
                 cmd.Parameters.AddWithValue("Previous", Previous);
 
                 connection.Open();
-                int n = cmd.ExecuteNonQuery();
-                if (n == 1)
-                {
-                    Console.WriteLine("Record Inserted");
-                }
                 connection.Close();
             }
         }
@@ -56,7 +51,9 @@ namespace WebAppCentralBank.Models.DataBase
             using (NpgsqlConnection connection = GetConnection())
             {
                 connection.Open();
-                string query = @"SELECT date FROM public.""Currency"" ORDER BY ""ID"" DESC LIMIT 1;";
+                string query = @"SELECT date 
+                                FROM public.""Currency"" 
+                                ORDER BY ""ID"" DESC LIMIT 1;";
                 NpgsqlCommand cmd = new NpgsqlCommand(query, connection);
                 DateTime date = new DateTime();
                 var reader = cmd.ExecuteReader();
@@ -83,17 +80,20 @@ namespace WebAppCentralBank.Models.DataBase
             using (NpgsqlConnection connection = GetConnection())
             {
                 connection.Open();
-                string query = @"SELECT charcode,nominal,name,value,previous FROM public.""Currency"" WHERE ""charcode"" LIKE @title ORDER BY ""ID"" DESC LIMIT 1 ;";
+                string query = @"SELECT charcode,nominal,name,value,previous 
+                                FROM public.""Currency"" WHERE ""charcode"" 
+                                LIKE @title ORDER BY ""ID"" DESC LIMIT 1 ;";
                 NpgsqlCommand cmd = new NpgsqlCommand(query, connection);
                 cmd.Parameters.AddWithValue("@title", likeValue);
 
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    currency.Nominal = reader.GetInt32(0);
-                    currency.Name = reader.GetString(1);
-                    currency.Value = reader.GetDecimal(2);
-                    currency.Previous = reader.GetDecimal(3);
+                    currency.CharCode = reader.GetString(0);
+                    currency.Nominal = reader.GetInt32(1);
+                    currency.Name = reader.GetString(2);
+                    currency.Value = reader.GetDecimal(3);
+                    currency.Previous = reader.GetDecimal(4);
                 }
                 connection.Close();
 

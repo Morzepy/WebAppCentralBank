@@ -21,7 +21,7 @@ namespace WebAppCentralBank.Models
 
             DateTime nowDateTime = DateTime.Now;
 
-            TimeSpan timer = new TimeSpan();
+            TimeSpan timer;
             if (nowDateTime.DayOfWeek == DayOfWeek.Saturday)
             {
                 timer = TimeSpan.FromDays(2);
@@ -84,7 +84,7 @@ namespace WebAppCentralBank.Models
         /// <returns>ICurrency</returns>
         public ICurrency GetGBPDbCurrency()
         {
-            var gbpDB = DBcurrency(new GBP(), LIKEVALUEUSD);
+            var gbpDB = DBcurrency(new GBP(), LIKEVALUEGBP);
             return gbpDB;
 
         }
@@ -106,7 +106,7 @@ namespace WebAppCentralBank.Models
         /// <returns>ICurrency</returns>
         public ICurrency GetCNYDbCurrency()
         {
-            var cnyDB = DBcurrency(new CNY(), LIKEVALUETRY);
+            var cnyDB = DBcurrency(new CNY(), LIKEVALUECNY);
             return cnyDB;
 
         }
@@ -117,7 +117,7 @@ namespace WebAppCentralBank.Models
         /// <param name="currency"></param>
         /// <param name="LIKEVALUE"></param>
         /// <returns>ICurrency</returns>
-        private ICurrency DBcurrency(ICurrency currency, string LIKEVALUE)
+        static private ICurrency DBcurrency(ICurrency currency, string LIKEVALUE)
         {
             DataBaseContext connection = new DataBaseContext();
             var dataBD = connection.SelectLastRecordCurrency(currency, LIKEVALUE);

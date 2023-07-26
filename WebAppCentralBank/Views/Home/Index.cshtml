@@ -1,8 +1,273 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>WebAppCentralBank</title>
+    <meta name="description" content="Описание страницы" />
+    <style>
+        header {
+            height: 100px;
+            width: auto;
+            background-color: #354251;
+            box-shadow: 0 20px 16px -16px rgba(0,0,0,0.6);
+        }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+        h1 {
+            color: white;
+            padding-top: 30px;
+            padding-left: 30px
+        }
+
+        h2 {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 40px
+        }
+
+        .curs {
+            width: 600px;
+            height: 200px;
+            background-color: #354251;
+            margin-bottom: 100px;
+            margin-top: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 8px 26px rgba(0,0,0,0.4), 0 28px 30px rgba(0,0,0,0.3);
+        }
+
+        p {
+            color: white
+        }
+
+        .block1 {
+            float: left;
+            display: block;
+            margin: 2px;
+            margin-left: 120px;
+            font-size: 25px
+        }
+
+        .block12 {
+            width: 80px;
+            height: 70px;
+            background-color: white;
+            margin-left: -12px;
+            text-align: center
+        }
+
+            .block12 p {
+                color: black;
+                padding-top: 10px
+            }
+
+        .block2 {
+            float: left;
+            margin: 2px;
+            margin-left: 220px;
+            display: block;
+            font-size: 25px
+        }
+
+        .block21 {
+            width: 80px;
+            height: 70px;
+            background-color: white;
+            text-align: center
+        }
+
+            .block21 p {
+                color: black;
+                padding-top: 10px
+            }
+
+        .buttons {
+            margin-bottom: 50px;
+            margin-top: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center
+        }
+
+        button {
+            font-size: 15px;
+            background-color: #354251;
+            color: white;
+            padding: 20px;
+            border-radius: 30px
+        }
+
+            button:hover {
+                font-size: 15px;
+                background-color: white;
+                color: #354251;
+                padding: 20px;
+                border-radius: 30px
+            }
+
+
+        .tables {
+            box-shadow: 0 8px 26px rgba(0,0,0,0.4), 0 28px 30px rgba(0,0,0,0.3);
+        }
+
+        .html-table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+            .html-table th {
+                border: 0px solid #dedede;
+                text-align: center;
+                color: #FFFFFF;
+                background-color: #354251;
+                padding: 5px 15px;
+                font-size: 20px
+            }
+
+            .html-table td {
+                border: 0px solid #dedede;
+                text-align: center;
+                color: #354251;
+                background-color: #00000000;
+                padding: 20px 15px;
+                font-size: 20px
+            }
+
+    </style>
+
+</head>
+
+<header>
+    <h1>WebAppCentralBank</h1>
+</header>
+
+<body>
+
+    <h2>Курс Валют ЦБ РФ на @ViewBag.date</h2>
+    <h3 align="center">Информация о курсах обмена валюты, установленных Центральным Банком Российской Федерации. Курсы иностранных валют к рублю по ЦБ на сегодня</h3>
+    <div class="curs">
+        <div class="block1">
+            <p>USD</p>
+            <div class="block12"><p>@ViewBag.usdValue рублей</p></div>
+        </div>
+        <div class="block2">
+            <p>EURO</p>
+            <div class="block21"><p>@ViewBag.eurValue рублей</p></div>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <Button onserverclick="Button_Click"> Обновить данные  </Button>
+    </div>
+
+    <div class="tables">
+        <table class="html-table">
+            <thead>
+                <tr>
+                    <th>
+                        Код
+                    </th>
+                    <th>
+                        Единиц
+                    </th>
+                    <th>
+                        Валюта
+                    </th>
+                    <th>
+                        Курс ЦБ РФ
+                    </th>
+                    <th>
+                        Изменение
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @ViewBag.usdCharCode
+                    </td>
+                    <td>
+                        @ViewBag.usdNominal
+                    </td>
+                    <td>
+                        @ViewBag.usdName
+                    </td>
+                    <td>
+                        @ViewBag.usdValue руб.
+                    </td>
+                    <td>
+                        @ViewBag.usdChange
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @ViewBag.eurCharCode
+                    </td>
+                    <td>
+                        @ViewBag.eurNominal
+                    </td>
+                    <td>
+                        @ViewBag.eurName
+                    </td>
+                    <td>
+                        @ViewBag.eurValue руб.
+                    </td>
+                    <td>
+                        @ViewBag.eurChange
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @ViewBag.gbpCharCode
+                    </td>
+                    <td>
+                        @ViewBag.gbpNominal
+                    </td>
+                    <td>
+                        @ViewBag.gbpName
+                    </td>
+                    <td>
+                        @ViewBag.gbpValue руб.
+                    </td>
+                    <td>
+                        @ViewBag.gbpChange
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @ViewBag.tryCharCode
+                    </td>
+                    <td>
+                        @ViewBag.tryNominal
+                    </td>
+                    <td>
+                        @ViewBag.tryName
+                    </td>
+                    <td>
+                        @ViewBag.tryValue руб.
+                    </td>
+                    <td>
+                        @ViewBag.tryChange
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @ViewBag.cnyCharCode
+                    </td>
+                    <td>
+                        @ViewBag.cnyNominal
+                    </td>
+                    <td>
+                        @ViewBag.cnyName
+                    </td>
+                    <td>
+                        @ViewBag.cnyValue руб.
+                    </td>
+                    <td>
+                        @ViewBag.cnyChange
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
