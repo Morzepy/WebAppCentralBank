@@ -38,6 +38,11 @@ namespace WebAppCentralBank.Models.DataBase
                 cmd.Parameters.AddWithValue("Previous", Previous);
 
                 connection.Open();
+                int n = cmd.ExecuteNonQuery();
+                if (n == 1)
+                {
+                    Console.WriteLine("Record Inserted");
+                }
                 connection.Close();
             }
         }
